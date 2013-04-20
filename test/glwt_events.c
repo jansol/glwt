@@ -32,6 +32,7 @@ static void window_callback(GLWTWindow *window, const GLWTWindowEvent *event, vo
             printf("Window %p exposed\n", window);
             {
                 glwtMakeCurrent(window);
+                glxwInit();
                 glClearColor(0.2f, 0.4f, 0.7f, 1.0f);
                 glClear(GL_COLOR_BUFFER_BIT);
                 glwtSwapBuffers(window);
@@ -104,8 +105,6 @@ static int newWindow()
     glwtWindowShow(windows[id], 1);
     glwtMakeCurrent(windows[id]);
     glwtSwapInterval(windows[id], 1);
-
-    glxwInit();
 
     printf("%s\n", (const char*)glGetString(GL_VERSION));
 
