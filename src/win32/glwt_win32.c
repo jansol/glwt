@@ -135,3 +135,19 @@ void glwtQuit()
 
     memset(&glwt, 0, sizeof(struct glwt));
 }
+
+uint64_t glwtGetTime()
+{
+    uint64_t time;
+    uint64_t frequency;
+    if (!QueryPerformanceFrequency(&frequency))
+    {
+        glwtWin32Error("QueryPerformanceCounter not supported!");
+        return 0;
+    }
+
+    QueryPerformanceCounter(&time);
+    time = time * 1000000000;
+    time = time / frequency;
+    return time;
+}
